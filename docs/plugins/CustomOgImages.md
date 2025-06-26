@@ -247,15 +247,17 @@ export const og: SocialImageOptions["Component"] = (
 ) => {
   let created: string | undefined
   let reading: string | undefined
+
   if (fileData.dates) {
     created = formatDate(getDate(cfg, fileData)!, cfg.locale)
   }
-  const { minutes, text: _timeTaken, words: _words } = readingTime(fileData.text!)
+
+  const { minutes } = readingTime(fileData.text!)
   reading = i18n(cfg.locale).components.contentMeta.readingTime({
     minutes: Math.ceil(minutes),
   })
 
-  const Li = [created, reading]
+  const Li = [created, reading].filter(Boolean)
 
   return (
     <div
@@ -283,8 +285,6 @@ export const og: SocialImageOptions["Component"] = (
       <div
         style={{
           display: "flex",
-          height: "100%",
-          width: "100%",
           flexDirection: "column",
           justifyContent: "flex-start",
           alignItems: "flex-start",
@@ -292,16 +292,17 @@ export const og: SocialImageOptions["Component"] = (
           paddingTop: "4rem",
           paddingBottom: "4rem",
           marginLeft: "4rem",
+          height: "100%",
+          width: "100%",
         }}
       >
         <img
-          src={`"https://${cfg.baseUrl}/static/icon.jpeg"`}
+          src={`https://${cfg.baseUrl}/static/icon.jpeg`}
           style={{
-            position: "relative",
-            backgroundClip: "border-box",
             borderRadius: "6rem",
           }}
           width={80}
+          height={80}
         />
         <div
           style={{
@@ -317,7 +318,6 @@ export const og: SocialImageOptions["Component"] = (
               fontSize: "3rem",
               fontWeight: 700,
               marginRight: "4rem",
-              fontFamily: fonts[0].name,
             }}
           >
             {title}
@@ -325,29 +325,28 @@ export const og: SocialImageOptions["Component"] = (
           <ul
             style={{
               color: cfg.theme.colors[colorScheme].gray,
-              gap: "1rem",
               fontSize: "1.5rem",
               fontFamily: fonts[1].name,
+              listStyle: "none",
+              padding: 0,
+              margin: 0,
             }}
           >
-            {Li.map((item, index) => {
-              if (item) {
-                return <li key={index}>{item}</li>
-              }
-            })}
+            {Li.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
           </ul>
         </div>
         <p
           style={{
             color: cfg.theme.colors[colorScheme].light,
             fontSize: "1.5rem",
-            overflow: "hidden",
             marginRight: "8rem",
+            overflow: "hidden",
             textOverflow: "ellipsis",
             display: "-webkit-box",
             WebkitLineClamp: 7,
             WebkitBoxOrient: "vertical",
-            lineClamp: 7,
             fontFamily: fonts[1].name,
           }}
         >
