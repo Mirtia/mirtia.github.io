@@ -260,6 +260,7 @@ export const og: SocialImageOptions["Component"] = (
   const Li = [created, reading].filter(Boolean)
 
   return (
+    {% raw %}
     <div
       style={{
         position: "relative",
@@ -268,10 +269,11 @@ export const og: SocialImageOptions["Component"] = (
         alignItems: "flex-start",
         height: "100%",
         width: "100%",
-        {% raw %}{{ backgroundImage: `url("https://${cfg.baseUrl}/static/og-image.jpeg")` }}{% endraw %},
+        backgroundImage: `url("https://${cfg.baseUrl}/static/og-image.jpeg")`,
         backgroundSize: "100% 100%",
       }}
     >
+    {% endraw %}
       <div
         style={{
           position: "absolute",
