@@ -237,7 +237,6 @@ export const customImage: SocialImageOptions["imageStructure"] = (
 The following example includes a customized social image with a custom background and formatted date:
 
 ```typescript title="custom-og.tsx"
-{% raw %}
 export const og: SocialImageOptions["Component"] = (
   cfg: GlobalConfiguration,
   fileData: QuartzPluginData,
@@ -296,7 +295,7 @@ export const og: SocialImageOptions["Component"] = (
         }}
       >
         <img
-          src={`https://${cfg.baseUrl}/static/icon.jpeg`}
+          src={`"https://${cfg.baseUrl}/static/icon.jpeg"`}
           style={{
             position: "relative",
             backgroundClip: "border-box",
@@ -358,5 +357,4 @@ export const og: SocialImageOptions["Component"] = (
     </div>
   )
 }
-{% endraw %}
 ```
